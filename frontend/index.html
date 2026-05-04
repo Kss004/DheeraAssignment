@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hand Detection</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Hand Detection</h1>
+      <span id="status" class="status status--idle">idle</span>
+    </header>
+
+    <main class="stage">
+      <div class="canvas-wrap">
+        <video id="video" autoplay muted playsinline></video>
+        <canvas id="canvas" width="640" height="480"></canvas>
+        <div class="hud">
+          <div class="hud-row">
+            <span class="hud-label">FPS</span>
+            <span id="fps" class="hud-value">0</span>
+          </div>
+          <div class="hud-row">
+            <span class="hud-label">Inference</span>
+            <span id="inference" class="hud-value">0 ms</span>
+          </div>
+          <div class="hud-row">
+            <span class="hud-label">Hands</span>
+            <span id="hand-count" class="hud-value">0</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="panel">
+        <section>
+          <h2>Controls</h2>
+          <div class="btn-row">
+            <button id="btn-start" class="btn btn--primary">Start</button>
+            <button id="btn-stop" class="btn" disabled>Stop</button>
+          </div>
+        </section>
+
+        <section>
+          <h2>View</h2>
+          <div class="btn-row">
+            <button class="btn btn--toggle" data-mode="landmarks">Landmarks</button>
+            <button class="btn btn--toggle" data-mode="bbox">BBox</button>
+            <button class="btn btn--toggle is-active" data-mode="both">Both</button>
+          </div>
+        </section>
+
+        <section>
+          <h2>Recording</h2>
+          <div class="btn-row">
+            <button id="btn-record" class="btn" disabled>Record</button>
+            <button id="btn-stop-record" class="btn" disabled>Stop &amp; Save</button>
+          </div>
+          <p id="record-info" class="muted">Records the canvas overlay to .webm.</p>
+        </section>
+
+        <section>
+          <h2>Detected</h2>
+          <ul id="hand-list" class="hand-list">
+            <li class="muted">No hands yet.</li>
+          </ul>
+        </section>
+      </aside>
+    </main>
+
+    <footer class="foot">
+      <span>Backend: <code id="backend-url">ws://localhost:8000/ws/detect</code></span>
+      <span class="muted">MediaPipe Tasks · FastAPI · Vite</span>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

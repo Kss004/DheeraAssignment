@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.python-version
+
+# Node
+node_modules/
+dist/
+.vite/
+
+# MediaPipe model assets (downloaded by download_models.py)
+backend/models/*.task
+
+# Recordings
+*.webm
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Env
+.env
+.env.local
