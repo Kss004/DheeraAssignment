@@ -1,4 +1,4 @@
-# Hand Detection — Real-Time Webcam MVP
+# Hand Detection — Real-Time Webcam
 
 A small full-stack prototype that detects hands in your webcam feed and overlays
 landmarks, bounding boxes, gesture labels, and stable per-hand IDs in the browser.
@@ -102,9 +102,9 @@ categories in a single forward pass.
 ## Challenges + trade-offs
 
 - **Frame transport** — picked binary JPEG over WebSocket (4-byte frame ID
-  + JPEG bytes) over base64 (avoids the ~33 % bloat) and over WebRTC (way
-  too much setup for an MVP). Encoding is done client-side at 480 px wide
-  with quality 0.6.
+  - JPEG bytes) over base64 (avoids the ~33 % bloat) and over WebRTC (way
+    too much setup for an MVP). Encoding is done client-side at 480 px wide
+    with quality 0.6.
 - **Stable hand IDs** — MediaPipe's per-frame ordering isn't a track ID, so
   I rolled a small centroid tracker that uses the average of the wrist
   (landmark 0) and the middle-finger MCP (landmark 9) as a palm anchor.
@@ -145,4 +145,4 @@ DheeraAssign/
 
 ## Demo
 
-See `docs/` for screenshots and a short demo video.
+See `docs/` for screenshots and a short demo video. (Adding Soon xd)
