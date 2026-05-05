@@ -13,9 +13,11 @@ landmarks, bounding boxes, gesture labels, and stable per-hand IDs in the browse
   (centroid tracker; survives brief occlusions).
 - **Gesture recognition**: thumbs up, thumbs down, victory, pointing up, open
   palm, closed fist, "ILoveYou".
-- **Visualization toggle**: skeleton landmarks / bounding box / both.
+- **Visualization toggle**: skeleton landmarks / bounding box / both /
+  heatmap (per-landmark radial blobs).
 - **Recording**: capture the canvas (overlay baked in) and download as `.webm`.
-- **Live HUD**: FPS, server inference time, hand count, per-hand gesture list.
+- **Live HUD**: FPS, server inference time, hand count, per-hand gesture
+  list.
 - Start / stop controls; clean status indicator.
 
 ## Requirements
@@ -133,7 +135,7 @@ DheeraAssign/
 │   ├── src/
 │   │   ├── main.js          # camera, WS, render loop, controls
 │   │   ├── ws.js            # WebSocket wrapper
-│   │   ├── overlay.js       # canvas drawing
+│   │   ├── overlay.js       # canvas drawing (incl. heatmap)
 │   │   ├── recorder.js      # MediaRecorder + download
 │   │   ├── fps.js           # rolling FPS counter
 │   │   └── style.css
@@ -145,4 +147,4 @@ DheeraAssign/
 
 ## Demo
 
-See `docs/` for screenshots and a short demo video. (Adding Soon xd)
+Screenshots and Video Recordings from UI are in `docs/`.

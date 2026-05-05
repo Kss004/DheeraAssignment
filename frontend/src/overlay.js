@@ -20,6 +20,14 @@ export function drawHands(ctx, hands, mode) {
   const w = ctx.canvas.width;
   const h = ctx.canvas.height;
 
+  if (mode === "heatmap") {
+    drawHeatmap(ctx, hands, w, h);
+    for (const hand of hands) {
+      drawLabel(ctx, hand, colorForId(hand.id), w, h);
+    }
+    return;
+  }
+
   for (const hand of hands) {
     const color = colorForId(hand.id);
 
@@ -58,6 +66,37 @@ export function drawHands(ctx, hands, mode) {
     // Label always shown — useful for ID tracking and gestures.
     drawLabel(ctx, hand, color, w, h);
   }
+}
+
+function drawHeatmap(ctx, hands, w, h) {
+  const off = document.createElement("canvas");
+  off.width = w;
+  off.height = h;
+  const octx = off.getContext("2d");
+  octx.globalCompositeOperation = "lighter";
+
+  const radius = Math.max(w, h) * 0.06;
+
+  for (const hand of hands) {
+    for (const lm of hand.landmarks) {
+      // z is roughly [-0.2, 0.2]; clamp + map to 0..1 for hue.
+      const t = Math.max(0, Math.min(1, 0.5 - (lm.z ?? 0) * 2));
+      const hue = (1 - t) * 240; // far = blue (240), near = red (0)
+      const grad = octx.createRadialGradient(
+        lm.x * w, lm.y * h, 0,
+        lm.x * w, lm.y * h, radius,
+      );
+      grad.addColorStop(0, `hsla(${hue}, 100%, 55%, 0.9)`);
+      grad.addColorStop(1, `hsla(${hue}, 100%, 55%, 0)`);
+      octx.fillStyle = grad;
+      octx.fillRect(lm.x * w - radius, lm.y * h - radius, radius * 2, radius * 2);
+    }
+  }
+
+  ctx.save();
+  ctx.globalAlpha = 0.7;
+  ctx.drawImage(off, 0, 0);
+  ctx.restore();
 }
 
 function drawLabel(ctx, hand, color, w, h) {
