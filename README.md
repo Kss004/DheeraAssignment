@@ -88,12 +88,12 @@ categories in a single forward pass.
 
 ## AI tools used
 
-- **Claude Code (Opus 4.7)** — used to scaffold the project end-to-end:
-  - chose the architecture (Python backend vs browser-only) by walking
-    through trade-offs with me;
+- **Claude Code ** — used to scaffold the project end-to-end:
+  - chose the architecture myself and then instructed the AI to generate the code for the same.
   - generated the FastAPI + MediaPipe + WebSocket skeleton, the centroid
     tracker, and the canvas overlay drawing code;
-  - wrote the build/run instructions and this README.
+- **Antigravity** — used lightly for spot edits and quick suggestions
+  during iteration.
 - **How I validated the AI output** — I ran the smoke tests end-to-end
   (`/healthz`, WebSocket handshake, live detections in browser devtools) and
   read each generated file before committing. Two corrections worth noting:
